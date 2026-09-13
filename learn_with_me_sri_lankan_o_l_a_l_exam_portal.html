@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn with Me - Sri Lankan O/L & A/L Exam Portal</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .glass-header {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(14, 165, 233, 0.4);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(14, 165, 233, 0.7);
+        }
+
+        /* Preloader Animation Keyframes */
+        @keyframes rollForward {
+            0% {
+                transform: translateY(120px) scale(0.3) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-10px) scale(1.1) rotate(540deg);
+                opacity: 1;
+            }
+            70% {
+                transform: translateY(0px) scale(0.95) rotate(720deg);
+            }
+            100% {
+                transform: translateY(0px) scale(1) rotate(900deg);
+                opacity: 1;
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { filter: drop-shadow(0 0 15px rgba(14, 165, 233, 0.8)); }
+            50% { filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.9)); }
+        }
+
+        .rolling-ball-anim {
+            animation: rollForward 1.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, pulseGlow 2s infinite ease-in-out 1.4s;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* GLOWING FACEBOOK BUTTON ANIMATION */
+        .fb-glow-pulse {
+            animation: fbGlow 2.5s infinite ease-in-out;
+        }
+        @keyframes fbGlow {
+            0%, 100% { box-shadow: 0 0 15px rgba(24, 119, 242, 0.8), 0 0 30px rgba(24, 119, 242, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(24, 119, 242, 1), 0 0 50px rgba(24, 119, 242, 0.7); }
+        }
+
+        /* GLOWING SIGN UP BUTTON ANIMATION */
+        .signup-glow-pulse {
+            animation: signUpGlow 2s infinite ease-in-out;
+        }
+        @keyframes signUpGlow {
+            0%, 100% { box-shadow: 0 0 12px rgba(14, 165, 233, 0.7), 0 0 24px rgba(14, 165, 233, 0.3); }
+            50% { box-shadow: 0 0 22px rgba(14, 165, 233, 1), 0 0 40px rgba(99, 102, 241, 0.8); }
+        }
+
+        /* SLIDING MAGNIFYING GLASS SEARCH ICON ANIMATION */
+        .animate-search-glass {
+            animation: slideSearchIcon 3.5s infinite ease-in-out;
+        }
+        @keyframes slideSearchIcon {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(6px); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen flex flex-col antialiased selection:bg-brand-500 selection:text-white relative transition-colors duration-300">
+
+    <!-- FLOATING GLOWING FACEBOOK BUTTON (LEFT SIDEBAR) -->
+    <a href="https://web.facebook.com/profile.php?id=61594309501636" target="_blank" rel="noopener noreferrer" 
+       class="fixed left-3 sm:left-4 top-[22%] z-40 bg-[#1877F2] hover:bg-[#166FE5] text-white p-3 rounded-2xl transition-all duration-300 hover:scale-110 flex items-center gap-2.5 group border border-white/30 fb-glow-pulse shadow-lg"
+       title="Follow Learn with Me on Facebook">
+        <i data-lucide="facebook" class="w-5 h-5 sm:w-6 sm:h-6 fill-current"></i>
+        <span class="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-300 ease-in-out text-xs font-bold tracking-wide pr-1">
+            Follow Learn with Me
+        </span>
+    </a>
+
+    <!-- SLEEK ROLLING BALL PRELOADER -->
+    <div id="preloader" class="fixed inset-0 z-50 bg-slate-950 flex flex-col items-center justify-center text-white transition-opacity duration-700 pointer-events-auto">
+        <div class="relative mb-6 flex items-center justify-center">
+            <!-- Outer Glow Rings -->
+            <div class="absolute w-32 h-32 rounded-full bg-sky-500/20 blur-xl animate-ping"></div>
+            <!-- Rolling Ball -->
+            <div class="rolling-ball-anim w-24 h-24 rounded-full bg-gradient-to-tr from-sky-500 via-indigo-500 to-cyan-400 p-0.5 shadow-2xl flex items-center justify-center border-2 border-white/30">
+                <div class="w-full h-full rounded-full bg-slate-950/80 backdrop-blur-md flex items-center justify-center relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-transparent via-sky-400/20 to-indigo-500/30"></div>
+                    <i data-lucide="graduation-cap" class="w-12 h-12 text-sky-400 drop-shadow-md"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center space-y-2 fade-in">
+            <h1 class="text-2xl sm:text-3xl font-black tracking-tight bg-gradient-to-r from-sky-400 via-indigo-300 to-cyan-200 bg-clip-text text-transparent">
+                Welcome to Learn with Me
+            </h1>
+            <p class="text-xs sm:text-sm font-semibold text-slate-400 uppercase tracking-widest">
+                Sri Lanka O/L & A/L Resource Hub
+            </p>
+        </div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="sticky top-0 z-40 bg-white/90 dark:bg-slate-900/90 glass-header border-b border-slate-200 dark:border-slate-800 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- Logo & Brand (Double-click logo triggers secret Admin login) -->
+                <div class="flex items-center gap-3 cursor-pointer group" onclick="handleLogoClick()">
+                    <div id="grad-cap-logo" class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-600 via-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-all active:scale-95" title="Double-click logo for Admin Access (Passcode: 20080315)">
+                        <i data-lucide="graduation-cap" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="text-xl sm:text-2xl font-extrabold tracking-tight bg-gradient-to-r from-sky-600 dark:from-sky-400 via-indigo-600 dark:via-indigo-300 to-cyan-600 dark:to-cyan-300 bg-clip-text text-transparent">
+                                Learn with Me
+                            </span>
+                            <span class="text-[10px] font-extrabold bg-sky-100 dark:bg-sky-900/60 text-sky-700 dark:text-sky-300 px-2 py-0.5 rounded-full uppercase tracking-wider border border-sky-300 dark:border-sky-500/30 flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> Cloud Portal
+                            </span>
+                        </div>
+                        <span class="block text-xs font-semibold text-slate-500 dark:text-slate-400 -mt-0.5 tracking-wide">O/L & A/L Exam Resource Hub</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Search Bar with Animated Magnifying Glass -->
+                <div class="hidden md:flex items-center gap-3 flex-1 max-w-sm mx-6">
+                    <div class="relative w-full">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-sky-500 dark:text-sky-400 animate-search-glass pointer-events-none"></i>
+                        <input type="text" id="global-search" oninput="handleSearch(this.value)" placeholder="Search subjects, grade, past papers..." class="w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    </div>
+                </div>
+
+                <!-- Header Actions -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    
+                    <!-- ADMIN INDICATOR & LOGOUT BUTTON (IF UNLOCKED) -->
+                    <div id="admin-badge-container" class="hidden">
+                        <!-- Rendered dynamically -->
+                    </div>
+
+                    <!-- UPLOAD BUTTONS -->
+                    <div class="flex items-center gap-1.5 sm:gap-2">
+                        <button onclick="triggerUploadProcess('pdf')" class="px-2.5 sm:px-3 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-md hover:scale-105" title="Upload PDF Past Paper or Note">
+                            <i data-lucide="file-plus" class="w-4 h-4"></i>
+                            <span class="hidden sm:inline">+ Upload PDF</span>
+                        </button>
+
+                        <button onclick="triggerUploadProcess('video')" class="px-2.5 sm:px-3 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white text-xs font-bold transition-all flex items-center gap-1.5 shadow-md hover:scale-105" title="Upload Video Lesson">
+                            <i data-lucide="video" class="w-4 h-4"></i>
+                            <span class="hidden sm:inline">+ Upload Video</span>
+                        </button>
+                    </div>
+
+                    <!-- Theme Toggle (Dark / Light Mode) -->
+                    <button onclick="toggleDarkMode()" class="p-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all shadow-sm" title="Toggle Light/Dark Theme">
+                        <i data-lucide="sun" class="w-4 h-4 hidden dark:block"></i>
+                        <i data-lucide="moon" class="w-4 h-4 block dark:hidden"></i>
+                    </button>
+
+                    <!-- User Auth Button ("Sign up to learn" with GLOW ANIMATION) -->
+                    <div id="auth-container">
+                        <!-- Rendered dynamically via JS -->
+                    </div>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button onclick="toggleMobileMenu()" class="md:hidden p-2 rounded-xl text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-800">
+                        <i data-lucide="menu" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Global Search & Nav -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 p-4 space-y-3 bg-white dark:bg-slate-900">
+            <div class="relative w-full">
+                <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-3 text-sky-500 dark:text-sky-400 animate-search-glass pointer-events-none"></i>
+                <input type="text" oninput="handleSearch(this.value)" placeholder="Search past papers, subjects..." class="w-full pl-10 pr-4 py-2 text-sm rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500">
+            </div>
+            <div class="grid grid-cols-2 gap-2 text-center">
+                <button onclick="scrollToSection('resources-section'); toggleMobileMenu()" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200">Resources</button>
+                <button onclick="scrollToSection('ai-assistant-section'); toggleMobileMenu()" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200">AI Assistant</button>
+                <button onclick="scrollToSection('quiz-section'); toggleMobileMenu()" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200">Practice Quiz</button>
+                <button onclick="scrollToSection('word-section'); toggleMobileMenu()" class="py-2.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-800 dark:text-slate-200">Vocabulary</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- FIREBASE SETUP HELPER / CONNECTION STATUS BANNER -->
+    <div id="firebase-config-banner" class="bg-slate-900 border-b border-slate-800 text-white text-xs px-4 py-2.5">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+                <span id="firebase-status-dot" class="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse"></span>
+                <span id="firebase-status-text" class="font-semibold text-slate-300">Firebase Cloud Integration: In-Memory / Local Sync (Ready)</span>
+            </div>
+            <button onclick="toggleFirebaseConfigModal()" class="px-3 py-1 rounded-lg bg-sky-500/20 hover:bg-sky-500/30 text-sky-300 border border-sky-500/30 font-bold transition-all text-[11px]">
+                ⚙️ Configure Firebase Cloud Keys
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- HERO BANNER -->
+        <section class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-slate-900 via-sky-950 to-indigo-950 text-white p-8 sm:p-12 lg:p-14 border border-slate-800 shadow-2xl">
+            <div class="absolute -right-16 -top-16 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute right-1/3 -bottom-10 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 max-w-3xl space-y-6">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-sky-300 text-xs font-bold uppercase tracking-wider">
+                    <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
+                    Official Sri Lankan O/L & A/L Exam Cloud Portal
+                </div>
+                
+                <h1 class="text-3xl sm:text-5xl font-black tracking-tight leading-tight">
+                    Excel in Your <span class="bg-gradient-to-r from-sky-400 to-indigo-300 bg-clip-text text-transparent">G.C.E. O/L & A/L</span> Exams with Free Realtime Resources.
+                </h1>
+
+                <p class="text-slate-300 text-sm sm:text-base leading-relaxed max-w-2xl font-normal">
+                    Access verified past papers, model papers, marking schemes, and video lessons for Grade 10 to Grade 13 across all streams. Direct Firebase Cloud Sync allows real-time global updates for students anywhere!
+                </p>
+
+                <!-- Quick Grade Filters -->
+                <div class="pt-2 flex flex-wrap items-center gap-2.5">
+                    <button onclick="quickFilterGrade('10')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold backdrop-blur-md transition-all flex items-center gap-1.5">
+                        Grade 10
+                    </button>
+                    <button onclick="quickFilterGrade('11')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold backdrop-blur-md transition-all flex items-center gap-1.5">
+                        <i data-lucide="book-open" class="w-3.5 h-3.5 text-amber-300"></i> Grade 11 (O/L)
+                    </button>
+                    <button onclick="quickFilterGrade('12')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold backdrop-blur-md transition-all flex items-center gap-1.5">
+                        Grade 12
+                    </button>
+                    <button onclick="quickFilterGrade('13')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold backdrop-blur-md transition-all flex items-center gap-1.5">
+                        <i data-lucide="award" class="w-3.5 h-3.5 text-sky-300"></i> Grade 13 (A/L)
+                    </button>
+                    <button onclick="quickFilterGrade('Other')" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-xs font-bold backdrop-blur-md transition-all flex items-center gap-1.5">
+                        Other (වෙනත්)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Stats Bar -->
+            <div class="mt-10 pt-8 border-t border-white/10 grid grid-cols-2 sm:grid-cols-4 gap-4 text-center sm:text-left">
+                <div>
+                    <div id="stat-papers" class="text-2xl sm:text-3xl font-extrabold text-white">0</div>
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">PDF Past Papers</div>
+                </div>
+                <div>
+                    <div id="stat-videos" class="text-2xl sm:text-3xl font-extrabold text-sky-400">0</div>
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Video Tutorials</div>
+                </div>
+                <div>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-emerald-400">Grade 10 - Other</div>
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Covered Grades</div>
+                </div>
+                <div>
+                    <div class="text-2xl sm:text-3xl font-extrabold text-indigo-300">Sign Up</div>
+                    <div class="text-xs font-medium text-slate-400 uppercase tracking-wider">Required for PDF Downloads</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI STUDY ASSISTANT SECTION -->
+        <section id="ai-assistant-section" class="bg-gradient-to-r from-sky-900 via-slate-900 to-indigo-950 rounded-3xl p-6 sm:p-8 border border-slate-800 text-white shadow-xl relative overflow-hidden">
+            <div class="max-w-3xl space-y-4">
+                <div class="flex items-center gap-2">
+                    <span class="px-3 py-1 rounded-full bg-sky-500/20 text-sky-300 text-xs font-extrabold uppercase tracking-wider border border-sky-500/30">Learn with Me AI</span>
+                    <span class="text-xs text-slate-400">Instant Exam & Paper Assistance</span>
+                </div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold">Ask the AI Exam Assistant</h2>
+                <p class="text-sm text-slate-300 font-normal leading-relaxed">
+                    Type any O/L or A/L subject question, topic, or paper inquiry in English, Sinhala, or Tamil (e.g. "Explain Combined Maths Integration formulas", "O/L ICT Binary questions", or "Accounting Ledger entries").
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-3 pt-2">
+                    <input type="text" id="ai-query-input" placeholder="e.g. Find Grade 11 ICT Past Paper Answer Outline..." class="flex-grow px-4 py-3 rounded-2xl bg-slate-950/80 border border-slate-700 text-white placeholder-slate-500 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                    <button onclick="askAIAssistant()" class="px-6 py-3 rounded-2xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-sm transition-all shadow-md flex items-center justify-center gap-2">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Ask AI</span>
+                    </button>
+                </div>
+
+                <!-- AI Output Display -->
+                <div id="ai-response-box" class="hidden mt-4 p-5 rounded-2xl bg-slate-950 border border-slate-800 text-slate-200 text-sm leading-relaxed space-y-2 fade-in">
+                    <div class="flex items-center gap-2 text-sky-400 font-bold text-xs uppercase tracking-wider">
+                        <i data-lucide="bot" class="w-4 h-4"></i>
+                        <span>AI Assistant Response</span>
+                    </div>
+                    <div id="ai-response-text" class="text-sm text-slate-300 font-normal whitespace-pre-line">
+                        Analyzing your question...
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESOURCE FILTER & EXPLORER SECTION -->
+        <section id="resources-section" class="space-y-6">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div>
+                    <h2 class="text-2xl font-extrabold text-slate-900 dark:text-white flex items-center gap-2">
+                        <i data-lucide="library" class="w-6 h-6 text-sky-500"></i>
+                        Exam Resource Library
+                    </h2>
+                    <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">Browse real-time cloud past papers, term tests, and video lectures uploaded by administrators.</p>
+                </div>
+
+                <div class="flex items-center gap-3 text-xs font-bold text-slate-500 dark:text-slate-400">
+                    <span id="active-count-label">0 items</span>
+                    <button onclick="resetFilters()" class="text-sky-600 dark:text-sky-400 hover:underline">Reset Filters</button>
+                </div>
+            </div>
+
+            <!-- Filter Controls -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+                <!-- Grade Filter -->
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Grade Level</label>
+                    <select id="filter-grade" onchange="applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="All">All Grades (10 - Other)</option>
+                        <option value="10">Grade 10</option>
+                        <option value="11">Grade 11 (O/L)</option>
+                        <option value="12">Grade 12</option>
+                        <option value="13">Grade 13 (A/L)</option>
+                        <option value="Other">Other (වෙනත්)</option>
+                    </select>
+                </div>
+
+                <!-- Subject Filter (Comprehensive O/L & A/L Stream List) -->
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Subject / Stream</label>
+                    <select id="filter-subject" onchange="applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="All">All Subjects & Streams</option>
+                        <optgroup label="Physical Science (Maths Stream)">
+                            <option value="Combined Maths">Combined Maths</option>
+                            <option value="Physics">Physics</option>
+                            <option value="Chemistry">Chemistry</option>
+                            <option value="Higher Mathematics">Higher Mathematics</option>
+                        </optgroup>
+                        <optgroup label="Biological Science Stream">
+                            <option value="Biology">Biology</option>
+                            <option value="Agricultural Science">Agricultural Science</option>
+                        </optgroup>
+                        <optgroup label="Commerce Stream">
+                            <option value="Accounting">Accounting</option>
+                            <option value="Business Studies">Business Studies</option>
+                            <option value="Economics">Economics</option>
+                        </optgroup>
+                        <optgroup label="Technology Stream">
+                            <option value="Engineering Technology (ET)">Engineering Tech (ET)</option>
+                            <option value="Bio Systems Technology (BST)">Bio Systems Tech (BST)</option>
+                            <option value="Science for Technology (SFT)">Science for Tech (SFT)</option>
+                        </optgroup>
+                        <optgroup label="Arts & Languages Stream">
+                            <option value="Sinhala">Sinhala / Tamil Literature</option>
+                            <option value="Political Science">Political Science</option>
+                            <option value="Logic">Logic & Scientific Method</option>
+                            <option value="Geography">Geography</option>
+                            <option value="Buddhist Civilization">Buddhist / Religious Civ</option>
+                        </optgroup>
+                        <optgroup label="O/L Core & Electives">
+                            <option value="Mathematics">O/L Mathematics</option>
+                            <option value="Science">O/L Science</option>
+                            <option value="English">English Language</option>
+                            <option value="History">History</option>
+                            <option value="ICT">ICT / Information Tech</option>
+                            <option value="Commerce (O/L)">O/L Business & Accounting</option>
+                        </optgroup>
+                        <option value="Other">Other (වෙනත්)</option>
+                    </select>
+                </div>
+
+                <!-- Term / Type Filter -->
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Term / Paper Type</label>
+                    <select id="filter-term" onchange="applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="All">All Types</option>
+                        <option value="Past Paper">G.C.E. Past Paper</option>
+                        <option value="Term 1">1st Term Test</option>
+                        <option value="Term 2">2nd Term Test</option>
+                        <option value="Term 3">3rd Term / Mock</option>
+                        <option value="Model Paper">Model Paper</option>
+                        <option value="Other">Other (වෙනත්)</option>
+                    </select>
+                </div>
+
+                <!-- Format Filter -->
+                <div>
+                    <label class="block text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Resource Format</label>
+                    <select id="filter-format" onchange="applyFilters()" class="w-full px-3 py-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-sky-500">
+                        <option value="All">All Formats (PDF & Video)</option>
+                        <option value="PDF">PDF Past Paper</option>
+                        <option value="Video">Video Tutorial</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Dynamic Resource Cards Grid Container -->
+            <div id="resources-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Injected dynamically -->
+            </div>
+        </section>
+
+        <!-- INTERACTIVE PRACTICE QUIZ & VOCABULARY -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- PRACTICE QUIZ (2 cols) -->
+            <section id="quiz-section" class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-800 shadow-lg space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                    <div>
+                        <span class="px-3 py-1 rounded-full bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-400 border border-sky-300 dark:border-sky-500/30 text-[11px] font-extrabold uppercase tracking-wider">Exam Practice</span>
+                        <h3 class="text-2xl font-extrabold text-slate-900 dark:text-white mt-1">O/L & A/L Quick Quiz</h3>
+                    </div>
+                    <span id="quiz-score" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-sky-600 dark:text-sky-400 text-xs font-bold border border-slate-300 dark:border-slate-700">
+                        Score: 0 / 0
+                    </span>
+                </div>
+
+                <!-- Quiz Card Container -->
+                <div id="quiz-card-body" class="space-y-6">
+                    <h4 id="quiz-question-text" class="text-base sm:text-lg font-bold text-slate-800 dark:text-slate-100">
+                        Loading quiz question...
+                    </h4>
+
+                    <div id="quiz-options-container" class="space-y-3">
+                        <!-- Generated dynamically -->
+                    </div>
+
+                    <div id="quiz-feedback" class="hidden p-4 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2">
+                        <i id="quiz-feedback-icon" class="w-4 h-4"></i>
+                        <span id="quiz-feedback-text"></span>
+                    </div>
+
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-200 dark:border-slate-800">
+                        <button onclick="resetQuiz()" class="px-4 py-2 rounded-xl border border-slate-300 dark:border-slate-700 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                            Restart Quiz
+                        </button>
+                        <button id="quiz-next-btn" onclick="nextQuizQuestion()" disabled class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 disabled:opacity-50 text-slate-950 font-bold text-xs transition-all shadow-md">
+                            Next Question &rarr;
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WORD OF THE DAY (1 col) -->
+            <section id="word-section" class="bg-gradient-to-br from-indigo-900 via-slate-900 to-sky-950 rounded-3xl p-6 sm:p-8 text-white border border-slate-800 shadow-xl flex flex-col justify-between space-y-6">
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="px-3 py-1 rounded-full bg-white/10 text-[11px] font-extrabold uppercase tracking-wider border border-white/10">English Vocabulary</span>
+                        <i data-lucide="book-open" class="w-5 h-5 text-sky-300"></i>
+                    </div>
+
+                    <div>
+                        <h3 id="wotd-word" class="text-3xl font-black tracking-tight text-white">Hypothesis</h3>
+                        <p id="wotd-pron" class="text-xs text-sky-300 font-semibold mt-0.5">/haɪˈpɒθ.ə.sɪs/ • Noun</p>
+                    </div>
+
+                    <p id="wotd-def" class="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
+                        A proposed explanation made on the basis of limited evidence as a starting point for further investigation in Science.
+                    </p>
+
+                    <div class="p-3.5 rounded-2xl bg-slate-950/80 border border-slate-800 text-xs space-y-1">
+                        <span class="text-amber-300 font-bold block uppercase tracking-wider">Example Usage:</span>
+                        <p id="wotd-example" class="italic text-slate-300">"In Grade 11 Science experiments, students formulate a hypothesis before testing."</p>
+                    </div>
+                </div>
+
+                <button onclick="speakText(document.getElementById('wotd-word').innerText)" class="w-full py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow">
+                    <i data-lucide="volume-2" class="w-4 h-4"></i>
+                    <span>Listen Pronunciation</span>
+                </button>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- MODAL 1: USER AUTHENTICATION MODAL ("Sign up to learn") -->
+    <div id="auth-modal" class="fixed inset-0 z-50 hidden bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl space-y-6 fade-in border border-slate-200 dark:border-slate-800">
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 text-sky-500 dark:text-sky-400 flex items-center justify-center mx-auto">
+                    <i data-lucide="user-plus" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 dark:text-white">Sign up to learn</h3>
+                <p id="auth-modal-reason" class="text-xs text-slate-500 dark:text-slate-400">
+                    Sign up or enter your details below to unlock direct PDF downloads and past papers access.
+                </p>
+            </div>
+
+            <form onsubmit="handleUserSignIn(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Full Name</label>
+                    <input type="text" id="user-name-input" required placeholder="e.g. Kasun Perera" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Email Address</label>
+                    <input type="email" id="user-email-input" required placeholder="name@example.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+                </div>
+                
+                <div class="flex gap-2 pt-2">
+                    <button type="button" onclick="closeAuthModal()" class="flex-1 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs shadow-md">
+                        Sign Up & Continue
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 2: SECRET ADMIN PASSCODE MODAL (Passcode: 20080315) -->
+    <div id="admin-passcode-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-sm w-full p-6 sm:p-8 shadow-2xl space-y-6 fade-in border border-slate-200 dark:border-slate-800">
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-500 dark:text-amber-400 flex items-center justify-center mx-auto">
+                    <i data-lucide="shield-lock" class="w-6 h-6"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-900 dark:text-white">Administrator Access</h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Enter administrator passcode to access cloud upload tools and management actions.</p>
+            </div>
+
+            <form onsubmit="verifyAdminPasscode(event)" class="space-y-4">
+                <div>
+                    <input type="password" id="admin-passcode-input" required placeholder="••••••••" class="w-full px-4 py-3 rounded-2xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-sm focus:outline-none focus:ring-2 focus:ring-sky-500 text-center font-bold tracking-widest">
+                </div>
+                <div id="admin-error-msg" class="hidden text-xs font-bold text-rose-500 text-center">
+                    Incorrect Passcode. Access Denied.
+                </div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="closeAdminPasscodeModal()" class="flex-1 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs shadow-md">
+                        Unlock Admin
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 3: FIREBASE CLOUD CONFIGURATION SETUP MODAL -->
+    <div id="firebase-config-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-6 fade-in border border-slate-200 dark:border-slate-800">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-3">
+                <div class="flex items-center gap-2">
+                    <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center font-bold">
+                        🔥
+                    </div>
+                    <div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white">Firebase Cloud Settings</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Connect your custom Firebase Cloud Console Project</p>
+                    </div>
+                </div>
+                <button onclick="toggleFirebaseConfigModal()" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-3 text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                <p>Paste your Firebase Config JSON or object snippet from Firebase Console &rarr; Project Settings:</p>
+                <textarea id="firebase-config-input" rows="6" placeholder='{
+  "apiKey": "AIzaSy...",
+  "authDomain": "your-app.firebaseapp.com",
+  "projectId": "your-app",
+  "storageBucket": "your-app.appspot.com",
+  "messagingSenderId": "123456789",
+  "appId": "1:123456789:web:abcdef"
+}' class="w-full font-mono p-3 rounded-2xl bg-slate-100 dark:bg-slate-950 border border-slate-300 dark:border-slate-800 text-xs focus:ring-2 focus:ring-sky-500 text-slate-900 dark:text-white"></textarea>
+            </div>
+
+            <div class="flex justify-end gap-2 pt-2">
+                <button onclick="resetFirebaseConfig()" class="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300">
+                    Use In-Memory Fallback
+                </button>
+                <button onclick="saveFirebaseConfigFromInput()" class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs shadow-md">
+                    Save Cloud Config & Connect
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL 4: UPLOAD RESOURCE MODAL WITH CLOUD STORAGE UPLOAD -->
+    <div id="upload-modal" class="fixed inset-0 z-50 hidden bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl space-y-6 fade-in border border-slate-200 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4">
+                <div class="flex items-center gap-2">
+                    <div id="upload-modal-badge" class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 border border-emerald-300 dark:border-emerald-500/30 flex items-center justify-center font-bold">
+                        <i id="upload-modal-icon" data-lucide="file-text" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 id="upload-modal-title" class="text-lg font-bold text-slate-900 dark:text-white">Upload PDF Resource</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Upload to Firebase Realtime Cloud so students globally see it instantly!</p>
+                    </div>
+                </div>
+                <button onclick="closeUploadModal()" class="p-2 rounded-xl text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleResourceUpload(event)" class="space-y-4">
+                <input type="hidden" id="upload-format" value="PDF">
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Resource Title</label>
+                    <input type="text" id="upload-title" required placeholder="e.g. 2023 G.C.E. A/L Combined Maths Paper I & II" class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-sky-500">
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Grade</label>
+                        <select id="upload-grade" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-sky-500">
+                            <option value="10">Grade 10</option>
+                            <option value="11">Grade 11 (O/L)</option>
+                            <option value="12">Grade 12</option>
+                            <option value="13">Grade 13 (A/L)</option>
+                            <option value="Other">Other (වෙනත්)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Term / Type</label>
+                        <select id="upload-term" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-sky-500">
+                            <option value="Past Paper">Past Paper</option>
+                            <option value="Term 1">1st Term Test</option>
+                            <option value="Term 2">2nd Term Test</option>
+                            <option value="Term 3">3rd Term / Mock</option>
+                            <option value="Model Paper">Model Paper</option>
+                            <option value="Other">Other (වෙනත්)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Subject / Stream</label>
+                        <select id="upload-subject" required class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-sky-500">
+                            <optgroup label="Physical Science (Maths)">
+                                <option value="Combined Maths">Combined Maths</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Higher Mathematics">Higher Mathematics</option>
+                            </optgroup>
+                            <optgroup label="Biological Science">
+                                <option value="Biology">Biology</option>
+                                <option value="Agricultural Science">Agricultural Science</option>
+                            </optgroup>
+                            <optgroup label="Commerce">
+                                <option value="Accounting">Accounting</option>
+                                <option value="Business Studies">Business Studies</option>
+                                <option value="Economics">Economics</option>
+                            </optgroup>
+                            <optgroup label="Technology">
+                                <option value="Engineering Technology (ET)">Engineering Tech (ET)</option>
+                                <option value="Bio Systems Technology (BST)">Bio Systems Tech (BST)</option>
+                                <option value="Science for Technology (SFT)">Science for Tech (SFT)</option>
+                            </optgroup>
+                            <optgroup label="Arts & Languages">
+                                <option value="Sinhala">Sinhala / Tamil Literature</option>
+                                <option value="Political Science">Political Science</option>
+                                <option value="Logic">Logic & Scientific Method</option>
+                                <option value="Geography">Geography</option>
+                                <option value="Buddhist Civilization">Buddhist / Religious Civ</option>
+                            </optgroup>
+                            <optgroup label="O/L Core & Electives">
+                                <option value="Mathematics">O/L Mathematics</option>
+                                <option value="Science">O/L Science</option>
+                                <option value="English">English Language</option>
+                                <option value="History">History</option>
+                                <option value="ICT">ICT / Information Tech</option>
+                                <option value="Commerce (O/L)">O/L Business & Accounting</option>
+                            </optgroup>
+                            <option value="Other">Other (වෙනත්)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Upload Method</label>
+                        <select id="upload-source-type" onchange="toggleUploadSourceInput(this.value)" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-sky-500">
+                            <option value="file">Browse Device File (Cloud Upload)</option>
+                            <option value="url">Direct Web Link / URL</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Native Local File Inputs (PDF / Video) -->
+                <div id="file-input-container">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1" id="upload-file-label">Select PDF Document</label>
+                    <input type="file" id="upload-file" onchange="handleFileSelected(this)" class="w-full p-2 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-xs text-slate-800 dark:text-slate-300 focus:ring-2 focus:ring-sky-500 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-xs file:font-bold file:bg-sky-500 file:text-slate-950 hover:file:bg-sky-400">
+                </div>
+
+                <!-- Custom URL input -->
+                <div id="url-input-container" class="hidden">
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1" id="upload-url-label">Resource Web URL</label>
+                    <input type="url" id="upload-url" placeholder="https://..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-sky-500">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1">Short Description / Exam Guidelines</label>
+                    <textarea id="upload-desc" rows="3" required placeholder="Details about this paper, duration, or topics covered..." class="w-full px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 bg-slate-100 dark:bg-slate-950 text-slate-900 dark:text-white text-xs focus:ring-2 focus:ring-sky-500"></textarea>
+                </div>
+
+                <!-- Upload Progress Bar -->
+                <div id="upload-progress-container" class="hidden space-y-1">
+                    <div class="flex justify-between text-[11px] font-bold text-sky-400">
+                        <span>Uploading to Cloud...</span>
+                        <span id="upload-progress-percent">0%</span>
+                    </div>
+                    <div class="w-full h-2 rounded-full bg-slate-800 overflow-hidden">
+                        <div id="upload-progress-bar" class="h-full bg-sky-500 transition-all duration-200 w-0"></div>
+                    </div>
+                </div>
+
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeUploadModal()" class="px-4 py-2.5 rounded-xl border border-slate-300 dark:border-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300">
+                        Cancel
+                    </button>
+                    <button type="submit" id="submit-upload-btn" class="px-6 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 font-extrabold text-xs shadow-md">
+                        Save & Publish Resource
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL 5: INSTANT VIEWER & DIRECT DOWNLOAD MODAL -->
+    <div id="viewer-modal" class="fixed inset-0 z-50 hidden bg-slate-950/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-5xl w-full h-[85vh] flex flex-col overflow-hidden shadow-2xl border border-slate-200 dark:border-slate-800 fade-in">
+            <!-- Header -->
+            <div class="p-4 sm:p-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-100/60 dark:bg-slate-950/60">
+                <div class="flex items-center gap-3">
+                    <span id="viewer-badge" class="px-2.5 py-1 rounded-md text-[10px] font-extrabold uppercase tracking-wider bg-rose-950 text-rose-400 border border-rose-500/30">
+                        PDF Paper
+                    </span>
+                    <div>
+                        <h3 id="viewer-title" class="text-sm sm:text-base font-extrabold text-slate-900 dark:text-white line-clamp-1">Paper Preview</h3>
+                        <p id="viewer-meta" class="text-xs text-slate-500 dark:text-slate-400">Grade 11 • Mathematics</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button id="viewer-download-btn" onclick="triggerDirectDownload()" class="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-md transition-all">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Direct Download</span>
+                    </button>
+                    <button onclick="closeViewerModal()" class="p-2 rounded-xl text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Content Frame/Player Container -->
+            <div class="flex-grow bg-slate-950 relative flex items-center justify-center overflow-hidden">
+                <iframe id="viewer-frame" class="w-full h-full border-none hidden" src="about:blank" title="PDF Viewer"></iframe>
+                <video id="viewer-video" class="w-full h-full object-contain hidden" controls></video>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-8 mt-12 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
+            <div class="flex items-center gap-2 font-bold text-slate-800 dark:text-slate-200">
+                <i data-lucide="graduation-cap" class="w-5 h-5 text-sky-500"></i>
+                <span>Learn with Me • Sri Lankan Exam Portal</span>
+            </div>
+            <p>© 2026 Learn with Me Educational Platform. Free for all Sri Lankan O/L & A/L Students.</p>
+        </div>
+    </footer>
+
+    <!-- FIREBASE & JAVASCRIPT MODULE ENGINE -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+        import { getFirestore, collection, doc, setDoc, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+
+        // Global Firebase variables
+        window.firebaseApp = null;
+        window.firebaseAuth = null;
+        window.firebaseDb = null;
+        window.firebaseStorage = null;
+        window.isFirebaseActive = false;
+
+        // Firebase Initialization Strategy
+        window.initFirebaseServices = async function(customConfig = null) {
+            let config = customConfig;
+
+            if (!config) {
+                const storedConfig = localStorage.getItem('lwm_firebase_custom_config');
+                if (storedConfig) {
+                    try {
+                        config = JSON.parse(storedConfig);
+                    } catch (e) {}
+                }
+            }
+
+            if (!config && typeof __firebase_config !== 'undefined' && __firebase_config) {
+                try {
+                    config = JSON.parse(__firebase_config);
+                } catch (e) {}
+            }
+
+            if (config && config.apiKey && !config.apiKey.includes('YOUR_')) {
+                try {
+                    window.firebaseApp = initializeApp(config);
+                    window.firebaseAuth = getAuth(window.firebaseApp);
+                    window.firebaseDb = getFirestore(window.firebaseApp);
+                    window.firebaseStorage = getStorage(window.firebaseApp);
+
+                    // Perform authentication check
+                    if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                        await signInWithCustomToken(window.firebaseAuth, __initial_auth_token).catch(() => signInAnonymously(window.firebaseAuth));
+                    } else {
+                        await signInAnonymously(window.firebaseAuth).catch(() => {});
+                    }
+
+                    window.isFirebaseActive = true;
+                    updateFirebaseStatusUI(true, "Firebase Realtime Cloud Active");
+                    subscribeToCloudSnapshot();
+                    return true;
+                } catch (e) {
+                    console.warn("Firebase config initialization error:", e);
+                }
+            }
+
+            window.isFirebaseActive = false;
+            updateFirebaseStatusUI(false, "In-Memory Mode (Demo Mode Active)");
+            return false;
+        };
+
+        function updateFirebaseStatusUI(active, label) {
+            const dot = document.getElementById('firebase-status-dot');
+            const text = document.getElementById('firebase-status-text');
+            if (dot && text) {
+                if (active) {
+                    dot.className = "w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse";
+                    text.innerText = `Firebase Realtime Cloud: ${label}`;
+                } else {
+                    dot.className = "w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse";
+                    text.innerText = `Storage Mode: ${label}`;
+                }
+            }
+        }
+
+        // Realtime listener for Firestore documents
+        function subscribeToCloudSnapshot() {
+            if (!window.firebaseDb || !window.isFirebaseActive) return;
+
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'learn-with-me-portal';
+            const colRef = collection(window.firebaseDb, 'artifacts', appId, 'public', 'data', 'exam_resources');
+
+            onSnapshot(colRef, (snapshot) => {
+                const cloudItems = [];
+                snapshot.forEach((doc) => {
+                    cloudItems.push({ id: doc.id, ...doc.data() });
+                });
+
+                // Sort descending by timestamp/date
+                cloudItems.sort((a, b) => (b.timestamp || 0) - (a.timestamp || 0));
+                
+                window.resources = cloudItems;
+                window.saveLocalBackup();
+                window.applyFilters();
+                window.updateStats();
+            }, (error) => {
+                console.warn("Realtime cloud snapshot error:", error);
+            });
+        }
+
+        // Global functions exposed to window for inline call handlers
+        window.saveResourceToCloud = async function(resourceObj, fileObj = null) {
+            if (window.isFirebaseActive && window.firebaseDb) {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'learn-with-me-portal';
+                
+                // If a local file is provided, upload to Firebase Storage
+                if (fileObj && window.firebaseStorage) {
+                    const storageRef = ref(window.firebaseStorage, `artifacts/${appId}/resources/${Date.now()}_${fileObj.name}`);
+                    const uploadTask = uploadBytesResumable(storageRef, fileObj);
+
+                    return new Promise((resolve, reject) => {
+                        const progressContainer = document.getElementById('upload-progress-container');
+                        const progressBar = document.getElementById('upload-progress-bar');
+                        const progressPercent = document.getElementById('upload-progress-percent');
+                        
+                        if (progressContainer) progressContainer.classList.remove('hidden');
+
+                        uploadTask.on('state_changed', 
+                            (snapshot) => {
+                                const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                if (progressBar) progressBar.style.width = progress + '%';
+                                if (progressPercent) progressPercent.innerText = Math.round(progress) + '%';
+                            }, 
+                            (error) => {
+                                alert("Upload to cloud failed: " + error.message);
+                                reject(error);
+                            }, 
+                            async () => {
+                                const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
+                                resourceObj.url = downloadURL;
+                                resourceObj.storagePath = uploadTask.snapshot.ref.fullPath;
+                                
+                                const docRef = doc(window.firebaseDb, 'artifacts', appId, 'public', 'data', 'exam_resources', resourceObj.id);
+                                await setDoc(docRef, resourceObj);
+                                if (progressContainer) progressContainer.classList.add('hidden');
+                                resolve(true);
+                            }
+                        );
+                    });
+                } else {
+                    const docRef = doc(window.firebaseDb, 'artifacts', appId, 'public', 'data', 'exam_resources', resourceObj.id);
+                    await setDoc(docRef, resourceObj);
+                    return true;
+                }
+            } else {
+                // Fallback to local array
+                window.resources.unshift(resourceObj);
+                window.saveResources();
+                window.applyFilters();
+                return true;
+            }
+        };
+
+        window.deleteResourceFromCloud = async function(id) {
+            const target = window.resources.find(r => r.id === id);
+            if (window.isFirebaseActive && window.firebaseDb) {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'learn-with-me-portal';
+                
+                // If cloud storage file exists
+                if (target && target.storagePath && window.firebaseStorage) {
+                    try {
+                        const fileRef = ref(window.firebaseStorage, target.storagePath);
+                        await deleteObject(fileRef);
+                    } catch (e) {}
+                }
+
+                const docRef = doc(window.firebaseDb, 'artifacts', appId, 'public', 'data', 'exam_resources', id);
+                await deleteDoc(docRef);
+                return true;
+            } else {
+                window.resources = window.resources.filter(r => r.id !== id);
+                window.saveResources();
+                window.applyFilters();
+                return true;
+            }
+        };
+
+        // On document ready start Firebase
+        window.addEventListener('DOMContentLoaded', () => {
+            window.initFirebaseServices();
+        });
+    </script>
+
+    <!-- CORE LOGIC AND UI SCRIPT -->
+    <script>
+        // Sample Quizzes
+        const sampleQuizzes = [
+            {
+                question: "In Grade 11 O/L Science, what is the chemical formula for Calcium Carbonate (Limestone)?",
+                options: ["CaCO3", "CaO", "Ca(OH)2", "CaCl2"],
+                correct: 0,
+                explanation: "Calcium Carbonate is represented by CaCO3. CaO is Quicklime and Ca(OH)2 is Slaked Lime."
+            },
+            {
+                question: "In A/L Combined Mathematics, what is the derivative of sin(2x) with respect to x?",
+                options: ["cos(2x)", "2 cos(2x)", "-2 cos(2x)", "1/2 cos(2x)"],
+                correct: 1,
+                explanation: "By applying the chain rule: d/dx[sin(2x)] = cos(2x) * d/dx[2x] = 2 cos(2x)."
+            },
+            {
+                question: "Which binary code represents the decimal number 10 in Grade 11 ICT?",
+                options: ["1000", "1010", "1100", "1110"],
+                correct: 1,
+                explanation: "10 in binary is calculated as (8x1) + (4x0) + (2x1) + (1x0) = 1010."
+            },
+            {
+                question: "In A/L Commerce (Accounting), which accounting equation principle is always true?",
+                options: ["Assets = Liabilities + Equity", "Assets = Equity - Liabilities", "Liabilities = Assets + Equity", "Equity = Liabilities - Assets"],
+                correct: 0,
+                explanation: "The fundamental accounting equation states that Total Assets equal Total Liabilities plus Equity."
+            }
+        ];
+
+        // Application State
+        window.resources = [];
+        let currentUser = null; // Stores logged-in student info
+        let isAdminUnlocked = false; // Unlocked via secret passcode 20080315
+        let pendingUploadType = 'pdf';
+        let currentViewingResource = null;
+        let uploadedFileBase64 = null;
+        let selectedFileObject = null;
+        let currentQuizIndex = 0;
+        let quizScore = 0;
+        let pendingResourceAction = null;
+
+        // Double-click detection timer for logo
+        let logoClickCount = 0;
+        let logoClickTimer = null;
+
+        // INITIALIZATION
+        window.addEventListener('DOMContentLoaded', () => {
+            loadUserAuth();
+            loadResources();
+            initQuiz();
+            applyFilters();
+            
+            // Auto dismiss preloader animation
+            setTimeout(() => {
+                const preloader = document.getElementById('preloader');
+                if (preloader) {
+                    preloader.style.opacity = '0';
+                    setTimeout(() => preloader.style.display = 'none', 700);
+                }
+            }, 1400);
+
+            lucide.createIcons();
+        });
+
+        // LOGO DOUBLE-CLICK DETECTION FOR SECRET ADMIN PASSCODE (20080315)
+        function handleLogoClick() {
+            logoClickCount++;
+            if (logoClickCount === 1) {
+                logoClickTimer = setTimeout(() => {
+                    logoClickCount = 0;
+                }, 400);
+            } else if (logoClickCount >= 2) {
+                clearTimeout(logoClickTimer);
+                logoClickCount = 0;
+                promptAdminPasscode();
+            }
+        }
+
+        // TRIGGER UPLOAD PROCESS
+        function triggerUploadProcess(type) {
+            pendingUploadType = type;
+            if (isAdminUnlocked) {
+                openUploadModal(type);
+            } else {
+                promptAdminPasscode();
+            }
+        }
+
+        // USER AUTHENTICATION SYSTEM WITH GLOWING SIGN UP BUTTON
+        function loadUserAuth() {
+            const stored = localStorage.getItem('lwm_logged_user');
+            if (stored) {
+                try {
+                    currentUser = JSON.parse(stored);
+                } catch (e) {
+                    currentUser = null;
+                }
+            }
+            renderAuthUI();
+        }
+
+        function renderAuthUI() {
+            const authContainer = document.getElementById('auth-container');
+            if (currentUser) {
+                authContainer.innerHTML = `
+                    <div class="flex items-center gap-2 bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 px-3 py-1.5 rounded-xl">
+                        <div class="w-6 h-6 rounded-full bg-sky-500 text-slate-950 font-black text-xs flex items-center justify-center uppercase">
+                            ${currentUser.name.charAt(0)}
+                        </div>
+                        <div class="hidden sm:block text-left">
+                            <span class="block text-xs font-bold text-sky-600 dark:text-sky-300 leading-none">${currentUser.name}</span>
+                            <span class="text-[10px] text-slate-500 dark:text-slate-400">Signed In</span>
+                        </div>
+                        <button onclick="handleUserSignOut()" class="p-1 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-rose-500 dark:text-rose-400 ml-1" title="Sign Out">
+                            <i data-lucide="log-out" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+                `;
+            } else {
+                authContainer.innerHTML = `
+                    <button id="sign-in-btn" onclick="openAuthModal('Sign up to learn or download PDF past papers!')" class="px-4 py-2 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-extrabold transition-all flex items-center gap-1.5 signup-glow-pulse border border-white/30">
+                        <i data-lucide="user-check" class="w-4 h-4"></i>
+                        <span>Sign up to learn</span>
+                    </button>
+                `;
+            }
+            renderAdminBadgeUI();
+            lucide.createIcons();
+        }
+
+        function renderAdminBadgeUI() {
+            const container = document.getElementById('admin-badge-container');
+            if (!container) return;
+
+            if (isAdminUnlocked) {
+                container.classList.remove('hidden');
+                container.innerHTML = `
+                    <div class="flex items-center gap-1.5 bg-amber-500/20 border border-amber-500/40 text-amber-400 px-2.5 py-1 rounded-xl text-xs font-extrabold">
+                        <i data-lucide="shield-check" class="w-3.5 h-3.5 text-amber-400"></i>
+                        <span class="hidden lg:inline">Admin Mode</span>
+                        <button onclick="logoutAdmin()" class="ml-1 bg-red-500 hover:bg-red-600 text-white px-2 py-0.5 rounded-lg text-[10px] font-bold transition-all shadow-sm" title="Exit Admin Mode">
+                            Admin Logout
+                        </button>
+                    </div>
+                `;
+            } else {
+                container.classList.add('hidden');
+                container.innerHTML = '';
+            }
+        }
+
+        function logoutAdmin() {
+            isAdminUnlocked = false;
+            renderAdminBadgeUI();
+            applyFilters();
+        }
+
+        function openAuthModal(reasonMessage = null) {
+            const reasonEl = document.getElementById('auth-modal-reason');
+            if (reasonMessage) {
+                reasonEl.innerText = reasonMessage;
+            } else {
+                reasonEl.innerText = "Sign up or enter your details below to unlock direct PDF downloads and past papers access.";
+            }
+            document.getElementById('auth-modal').classList.remove('hidden');
+        }
+
+        function closeAuthModal() {
+            document.getElementById('auth-modal').classList.add('hidden');
+            pendingResourceAction = null;
+        }
+
+        function handleUserSignIn(event) {
+            event.preventDefault();
+            const name = document.getElementById('user-name-input').value.trim();
+            const email = document.getElementById('user-email-input').value.trim();
+
+            if (name && email) {
+                currentUser = { name, email, loggedAt: new Date().toISOString() };
+                localStorage.setItem('lwm_logged_user', JSON.stringify(currentUser));
+                renderAuthUI();
+                closeAuthModal();
+
+                if (pendingResourceAction) {
+                    const { action, id } = pendingResourceAction;
+                    pendingResourceAction = null;
+                    if (action === 'view' || action === 'download') {
+                        openViewerModal(id);
+                    }
+                }
+            }
+        }
+
+        function handleUserSignOut() {
+            currentUser = null;
+            localStorage.removeItem('lwm_logged_user');
+            renderAuthUI();
+        }
+
+        // SECRET ADMIN AUTHENTICATION (Passcode: 20080315)
+        function promptAdminPasscode() {
+            document.getElementById('admin-passcode-input').value = '';
+            document.getElementById('admin-error-msg').classList.add('hidden');
+            document.getElementById('admin-passcode-modal').classList.remove('hidden');
+        }
+
+        function closeAdminPasscodeModal() {
+            document.getElementById('admin-passcode-modal').classList.add('hidden');
+        }
+
+        function verifyAdminPasscode(event) {
+            event.preventDefault();
+            const passcode = document.getElementById('admin-passcode-input').value;
+            
+            // SECRET PASSCODE REQUIRED: 20080315
+            if (passcode === '20080315') {
+                isAdminUnlocked = true;
+                closeAdminPasscodeModal();
+                renderAdminBadgeUI();
+                applyFilters();
+                
+                if (pendingUploadType) {
+                    openUploadModal(pendingUploadType);
+                }
+            } else {
+                document.getElementById('admin-error-msg').classList.remove('hidden');
+            }
+        }
+
+        // LOCAL & CLOUD STORAGE SYNCHRONIZATION
+        function loadResources() {
+            const stored = localStorage.getItem('learnWithMeResources') || localStorage.getItem('lwm_portal_resources');
+            if (stored) {
+                try {
+                    window.resources = JSON.parse(stored);
+                } catch (e) {
+                    window.resources = [];
+                }
+            } else {
+                window.resources = [];
+                saveResources();
+            }
+            updateStats();
+        }
+
+        window.saveLocalBackup = function() {
+            localStorage.setItem('learnWithMeResources', JSON.stringify(window.resources));
+            localStorage.setItem('lwm_portal_resources', JSON.stringify(window.resources));
+        };
+
+        function saveResources() {
+            window.saveLocalBackup();
+            updateStats();
+        }
+
+        window.updateStats = function() {
+            const pdfCount = window.resources.filter(r => r.format === 'PDF').length;
+            const videoCount = window.resources.filter(r => r.format === 'Video').length;
+
+            document.getElementById('stat-papers').innerText = pdfCount;
+            document.getElementById('stat-videos').innerText = videoCount;
+        };
+
+        // FILTER & RENDER ENGINE
+        window.applyFilters = function() {
+            const search = (document.getElementById('global-search').value || '').toLowerCase();
+            const grade = document.getElementById('filter-grade').value;
+            const subject = document.getElementById('filter-subject').value;
+            const term = document.getElementById('filter-term').value;
+            const format = document.getElementById('filter-format').value;
+
+            const filtered = window.resources.filter(item => {
+                const matchesSearch = (item.title || '').toLowerCase().includes(search) || 
+                                      (item.description || '').toLowerCase().includes(search) ||
+                                      (item.subject || '').toLowerCase().includes(search);
+                const matchesGrade = grade === 'All' || item.grade === grade;
+                const matchesSubject = subject === 'All' || item.subject === subject;
+                const matchesTerm = term === 'All' || item.term === term;
+                const matchesFormat = format === 'All' || item.format === format;
+
+                return matchesSearch && matchesGrade && matchesSubject && matchesTerm && matchesFormat;
+            });
+
+            renderResourceCards(filtered);
+            document.getElementById('active-count-label').innerText = `${filtered.length} of ${window.resources.length} items`;
+        };
+
+        function handleSearch(val) {
+            applyFilters();
+        }
+
+        function quickFilterGrade(gradeVal) {
+            document.getElementById('filter-grade').value = gradeVal;
+            applyFilters();
+            scrollToSection('resources-section');
+        }
+
+        function resetFilters() {
+            document.getElementById('global-search').value = '';
+            document.getElementById('filter-grade').value = 'All';
+            document.getElementById('filter-subject').value = 'All';
+            document.getElementById('filter-term').value = 'All';
+            document.getElementById('filter-format').value = 'All';
+            applyFilters();
+        }
+
+        function renderResourceCards(items) {
+            const grid = document.getElementById('resources-grid');
+            grid.innerHTML = '';
+
+            if (items.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-14 bg-white dark:bg-slate-900 rounded-3xl border border-dashed border-slate-300 dark:border-slate-800">
+                        <div class="w-16 h-16 rounded-2xl bg-slate-100 dark:bg-slate-800 text-slate-400 flex items-center justify-center mx-auto mb-4">
+                            <i data-lucide="folder-plus" class="w-8 h-8"></i>
+                        </div>
+                        <h4 class="text-lg font-bold text-slate-900 dark:text-white">No Exam Resources Uploaded Yet</h4>
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-sm mx-auto">
+                            The cloud repository is ready. Click "+ Upload PDF" or "+ Upload Video" at the top to publish your first resource!
+                        </p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl transition-all space-y-4 flex flex-col justify-between group relative overflow-hidden";
+
+                const isPdf = item.format === 'PDF';
+                const badgeColor = isPdf ? 'bg-rose-100 dark:bg-rose-950 text-rose-600 dark:text-rose-400 border-rose-300 dark:border-rose-500/30' : 'bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 border-sky-300 dark:border-sky-500/30';
+                const formatIcon = isPdf ? 'file-text' : 'play-circle';
+
+                card.innerHTML = `
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="px-2.5 py-1 rounded-lg text-[10px] font-extrabold uppercase tracking-wider ${badgeColor} border flex items-center gap-1">
+                                <i data-lucide="${formatIcon}" class="w-3 h-3"></i>
+                                ${item.format}
+                            </span>
+                            <span class="text-xs font-extrabold text-slate-500 dark:text-slate-400">
+                                Grade ${item.grade} • ${item.term}
+                            </span>
+                        </div>
+
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white group-hover:text-sky-500 transition-colors line-clamp-2">
+                            ${item.title}
+                        </h3>
+
+                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-2 line-clamp-3 leading-relaxed">
+                            ${item.description}
+                        </p>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between gap-2 flex-wrap">
+                        <span class="text-[11px] font-semibold text-slate-500 dark:text-slate-400">${item.subject}</span>
+                        
+                        <div class="flex items-center gap-2">
+                            ${isAdminUnlocked ? `
+                                <button onclick="deleteResource('${item.id}')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1.5 rounded-xl font-bold text-xs shadow-sm transition-all flex items-center gap-1" title="Delete Resource (Admin)">
+                                    <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                    <span>Delete</span>
+                                </button>
+                            ` : ''}
+                            
+                            ${isPdf ? `
+                                <button onclick="handlePDFDownloadRequest('${item.id}')" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                                    <i data-lucide="download" class="w-3.5 h-3.5"></i>
+                                    <span>View / Download PDF</span>
+                                </button>
+                            ` : `
+                                <button onclick="handleVideoWatchRequest('${item.id}')" class="px-3.5 py-2 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-bold text-xs transition-all flex items-center gap-1.5 shadow-sm">
+                                    <i data-lucide="play" class="w-3.5 h-3.5"></i>
+                                    <span>Watch Video</span>
+                                </button>
+                            `}
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+
+            lucide.createIcons();
+        }
+
+        // STRICT LOGIN/SIGNUP ENFORCEMENT FOR DOWNLOADS
+        function handlePDFDownloadRequest(id) {
+            const item = window.resources.find(r => r.id === id);
+            if (!item) return;
+
+            if (!currentUser) {
+                pendingResourceAction = { action: 'view', id: id };
+                openAuthModal("🔒 Sign up is required to view and download PDF past papers. Please sign up or sign in below to unlock instant PDF access.");
+                return;
+            }
+
+            openViewerModal(id);
+        }
+
+        function handleVideoWatchRequest(id) {
+            const item = window.resources.find(r => r.id === id);
+            if (!item) return;
+
+            openViewerModal(id);
+        }
+
+        function triggerDirectDownload() {
+            if (!currentUser) {
+                closeViewerModal();
+                openAuthModal("🔒 You must sign up to download PDF past papers!");
+                return;
+            }
+
+            if (currentViewingResource && currentViewingResource.url) {
+                const a = document.createElement('a');
+                a.href = currentViewingResource.url;
+                a.download = `${currentViewingResource.title.replace(/[^a-zA-Z0-9]/g, '_')}.pdf`;
+                a.target = '_blank';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }
+        }
+
+        function openViewerModal(id) {
+            const item = window.resources.find(r => r.id === id);
+            if (!item) return;
+
+            currentViewingResource = item;
+
+            document.getElementById('viewer-title').innerText = item.title;
+            document.getElementById('viewer-meta').innerText = `Grade ${item.grade} • ${item.subject} • ${item.term}`;
+            
+            const badge = document.getElementById('viewer-badge');
+            badge.innerText = item.format;
+
+            const frame = document.getElementById('viewer-frame');
+            const video = document.getElementById('viewer-video');
+
+            if (item.format === 'PDF') {
+                video.classList.add('hidden');
+                video.pause();
+                frame.classList.remove('hidden');
+                frame.src = item.url;
+            } else {
+                frame.classList.add('hidden');
+                frame.src = 'about:blank';
+                video.classList.remove('hidden');
+                video.src = item.url;
+                video.play().catch(() => {});
+            }
+
+            document.getElementById('viewer-modal').classList.remove('hidden');
+        }
+
+        function closeViewerModal() {
+            document.getElementById('viewer-modal').classList.add('hidden');
+            const frame = document.getElementById('viewer-frame');
+            const video = document.getElementById('viewer-video');
+            frame.src = 'about:blank';
+            video.pause();
+            video.src = '';
+            currentViewingResource = null;
+        }
+
+        // FIREBASE CLOUD CONFIG HELPER MODAL
+        function toggleFirebaseConfigModal() {
+            document.getElementById('firebase-config-modal').classList.toggle('hidden');
+        }
+
+        function saveFirebaseConfigFromInput() {
+            const val = document.getElementById('firebase-config-input').value.trim();
+            if (!val) {
+                alert('Please enter a valid JSON Firebase config.');
+                return;
+            }
+            try {
+                const parsed = JSON.parse(val);
+                localStorage.setItem('lwm_firebase_custom_config', JSON.stringify(parsed));
+                alert('Firebase Config saved! Re-initializing cloud services...');
+                window.initFirebaseServices(parsed);
+                toggleFirebaseConfigModal();
+            } catch (e) {
+                alert('Invalid JSON syntax. Please format as valid JSON object.');
+            }
+        }
+
+        function resetFirebaseConfig() {
+            localStorage.removeItem('lwm_firebase_custom_config');
+            toggleFirebaseConfigModal();
+            window.initFirebaseServices();
+        }
+
+        // UPLOAD ENGINE
+        function openUploadModal(type = 'pdf') {
+            const isPdf = type === 'pdf';
+            document.getElementById('upload-format').value = isPdf ? 'PDF' : 'Video';
+            document.getElementById('upload-modal-title').innerText = isPdf ? 'Upload Local PDF Paper' : 'Upload Video Lesson';
+            
+            const fileLabel = document.getElementById('upload-file-label');
+            const fileInput = document.getElementById('upload-file');
+
+            if (isPdf) {
+                fileLabel.innerText = "Select Local PDF File";
+                fileInput.accept = "application/pdf";
+            } else {
+                fileLabel.innerText = "Select Local Video File";
+                fileInput.accept = "video/*";
+            }
+
+            document.getElementById('upload-modal').classList.remove('hidden');
+        }
+
+        function closeUploadModal() {
+            document.getElementById('upload-modal').classList.add('hidden');
+            uploadedFileBase64 = null;
+            selectedFileObject = null;
+            document.getElementById('upload-file').value = '';
+            const progressContainer = document.getElementById('upload-progress-container');
+            if (progressContainer) progressContainer.classList.add('hidden');
+        }
+
+        function toggleUploadSourceInput(val) {
+            if (val === 'file') {
+                document.getElementById('url-input-container').classList.add('hidden');
+                document.getElementById('file-input-container').classList.remove('hidden');
+            } else {
+                document.getElementById('url-input-container').classList.remove('hidden');
+                document.getElementById('file-input-container').classList.add('hidden');
+            }
+        }
+
+        function handleFileSelected(input) {
+            const file = input.files[0];
+            if (file) {
+                selectedFileObject = file;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    uploadedFileBase64 = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        async function handleResourceUpload(event) {
+            event.preventDefault();
+            const btn = document.getElementById('submit-upload-btn');
+            btn.disabled = true;
+            btn.innerText = 'Publishing...';
+
+            const format = document.getElementById('upload-format').value;
+            const sourceType = document.getElementById('upload-source-type').value;
+            let finalUrl = document.getElementById('upload-url').value;
+
+            if (sourceType === 'file' && uploadedFileBase64) {
+                finalUrl = uploadedFileBase64;
+            }
+
+            if (!finalUrl && sourceType === 'url') {
+                alert('Please select a local file or provide a URL!');
+                btn.disabled = false;
+                btn.innerText = 'Save & Publish Resource';
+                return;
+            }
+
+            const newRes = {
+                id: 'res-' + Date.now(),
+                title: document.getElementById('upload-title').value,
+                grade: document.getElementById('upload-grade').value,
+                subject: document.getElementById('upload-subject').value,
+                term: document.getElementById('upload-term').value,
+                format: format,
+                url: finalUrl,
+                description: document.getElementById('upload-desc').value,
+                dateAdded: new Date().toISOString().split('T')[0],
+                timestamp: Date.now()
+            };
+
+            try {
+                await window.saveResourceToCloud(newRes, selectedFileObject);
+                closeUploadModal();
+            } catch (err) {
+                console.error(err);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Save & Publish Resource';
+            }
+        }
+
+        // PROMINENT ADMIN DELETE FUNCTIONALITY
+        async function deleteResource(id) {
+            if (!isAdminUnlocked) {
+                promptAdminPasscode();
+                return;
+            }
+
+            const targetResource = window.resources.find(r => r.id === id);
+            const title = targetResource ? targetResource.title : 'this resource';
+
+            if (confirm(`Are you sure you want to delete "${title}"? This action cannot be undone.`)) {
+                await window.deleteResourceFromCloud(id);
+            }
+        }
+
+        // AI STUDY ASSISTANT
+        function askAIAssistant() {
+            const input = document.getElementById('ai-query-input');
+            const query = (input.value || '').trim();
+
+            if (!query) {
+                alert('Please enter a topic or question first.');
+                return;
+            }
+
+            const box = document.getElementById('ai-response-box');
+            const text = document.getElementById('ai-response-text');
+
+            box.classList.remove('hidden');
+            text.innerText = 'Analyzing Sri Lankan syllabus guidelines and matching uploaded cloud resources...';
+
+            setTimeout(() => {
+                let response = `Based on Sri Lankan National Institute of Education (NIE) guidelines for "${query}":\n\n`;
+                
+                if (query.toLowerCase().includes('math') || query.toLowerCase().includes('integration')) {
+                    response += "• Stream/Topic: Physical Science - Combined Mathematics (Calculus).\n• Advice: Review standard substitution methods and practice 2018-2023 A/L Past Paper Part B structured essay questions.";
+                } else if (query.toLowerCase().includes('chem') || query.toLowerCase().includes('reaction')) {
+                    response += "• Stream/Topic: Biological / Physical Science - Chemistry.\n• Advice: Review oxidation state balance tables and stoichiometry calculations in Grade 12 syllabus Unit 4.";
+                } else if (query.toLowerCase().includes('account') || query.toLowerCase().includes('ledger')) {
+                    response += "• Stream/Topic: Commerce - Accounting.\n• Advice: Practice double entry book-keeping rules, bank reconciliations, and manufacturing account adjustments.";
+                } else {
+                    response += `• Guidance: Matched Grade 11 & 13 exam syllabus. Solve structured Paper II essay questions and double check with official marking schemes.`;
+                }
+
+                text.innerText = response;
+            }, 600);
+        }
+
+        // PRACTICE QUIZ ENGINE
+        function initQuiz() {
+            currentQuizIndex = 0;
+            quizScore = 0;
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            const q = sampleQuizzes[currentQuizIndex];
+            document.getElementById('quiz-score').innerText = `Score: ${quizScore} / ${sampleQuizzes.length}`;
+            document.getElementById('quiz-question-text').innerText = `${currentQuizIndex + 1}. ${q.question}`;
+
+            const container = document.getElementById('quiz-options-container');
+            container.innerHTML = '';
+
+            document.getElementById('quiz-feedback').classList.add('hidden');
+            document.getElementById('quiz-next-btn').disabled = true;
+
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = "w-full text-left p-3.5 rounded-2xl border border-slate-200 dark:border-slate-800 hover:border-sky-500 bg-slate-50 dark:bg-slate-950 text-xs sm:text-sm font-semibold transition-all flex items-center justify-between";
+                btn.onclick = () => selectQuizOption(idx);
+                btn.innerHTML = `
+                    <span>${opt}</span>
+                    <span class="w-6 h-6 rounded-lg bg-slate-200 dark:bg-slate-800 text-xs font-bold flex items-center justify-center text-slate-500 dark:text-slate-400">${String.fromCharCode(65 + idx)}</span>
+                `;
+                container.appendChild(btn);
+            });
+        }
+
+        function selectQuizOption(index) {
+            const q = sampleQuizzes[currentQuizIndex];
+            const btns = document.querySelectorAll('#quiz-options-container button');
+            btns.forEach(b => b.disabled = true);
+
+            const feedback = document.getElementById('quiz-feedback');
+            const feedbackText = document.getElementById('quiz-feedback-text');
+            feedback.classList.remove('hidden');
+
+            if (index === q.correct) {
+                quizScore++;
+                btns[index].className = "w-full text-left p-3.5 rounded-2xl border border-emerald-500 bg-emerald-950/60 text-emerald-300 text-xs sm:text-sm font-semibold flex items-center justify-between";
+                feedback.className = "p-4 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2 bg-emerald-950/80 text-emerald-300 border border-emerald-500/30";
+                feedbackText.innerText = "Correct! " + q.explanation;
+            } else {
+                btns[index].className = "w-full text-left p-3.5 rounded-2xl border border-rose-500 bg-rose-950/60 text-rose-300 text-xs sm:text-sm font-semibold flex items-center justify-between";
+                btns[q.correct].className = "w-full text-left p-3.5 rounded-2xl border border-emerald-500 bg-emerald-950/60 text-emerald-300 text-xs sm:text-sm font-semibold flex items-center justify-between";
+                feedback.className = "p-4 rounded-2xl text-xs sm:text-sm font-bold flex items-center gap-2 bg-rose-950/80 text-rose-300 border border-rose-500/30";
+                feedbackText.innerText = "Incorrect. " + q.explanation;
+            }
+
+            document.getElementById('quiz-score').innerText = `Score: ${quizScore} / ${sampleQuizzes.length}`;
+            document.getElementById('quiz-next-btn').disabled = false;
+        }
+
+        function nextQuizQuestion() {
+            currentQuizIndex++;
+            if (currentQuizIndex < sampleQuizzes.length) {
+                renderQuizQuestion();
+            } else {
+                alert(`Quiz Complete! Your Score: ${quizScore} / ${sampleQuizzes.length}`);
+                initQuiz();
+            }
+        }
+
+        function resetQuiz() {
+            initQuiz();
+        }
+
+        // SPEECH ENGINE
+        function speakText(text) {
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-US';
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Audio pronunciation is not supported on this browser.');
+            }
+        }
+
+        // UI HELPERS
+        function toggleDarkMode() {
+            document.documentElement.classList.toggle('dark');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) el.scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
